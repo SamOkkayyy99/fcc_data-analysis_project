@@ -22,16 +22,15 @@ def draw_cat_plot():
     df_cat = df_cat.groupby(['cardio', 'variable', 'value']).size().reset_index(name='total')
     df_cat['variable'] = df_cat['variable'].map({'cholesterol': 'Cholesterol', 'gluc': 'Glucose', 'smoke': 'Smoking', 'alco': 'Alcohol', 'active': 'Physical Activity', 'overweight': 'Overweight'})
 
-    
 
     # Draw the catplot with 'sns.catplot()'
     graph = sns.catplot(data=df_cat, kind='bar', x='variable', y='total', hue='value', col='cardio')
-    fig = graph.fig
 
 
     # Get the figure for the output
-    fig = None
+    fig = graph.fig
 
+    plt.xticks(ticks=range(6), labels=['active', 'alco', 'cholesterol', 'gluc', 'overweight', 'smoke'])
 
     # Do not modify the next two lines
     fig.savefig('catplot.png')
